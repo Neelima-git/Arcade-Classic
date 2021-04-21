@@ -5,11 +5,20 @@
     <script>
         var canvas;
         var canvasContext;
+        var calledRect = 1;
 
         window.onload = function() {
             console.log("Exicted to learn canvas!");
             canvas = document.getElementById('canvasGame');
             canvasContext = canvas.getContext('2d');
+
+            drawRectangles(); //called function for the first time
+            drawRectangles(); //called function for second time
+        }
+
+        function drawRectangles(){
+            
+            console.log("called drawRectangle for the " + calledRect+ " time!" );
             canvasContext.fillStyle = 'black';
             canvasContext.fillRect(0,0,canvas.width,canvas.height);
             canvasContext.fillStyle = 'blue';
@@ -17,8 +26,15 @@
             canvasContext.fillStyle = 'red';
             canvasContext.fillRect(275,175,250,250);
             canvasContext.fillStyle = 'yellow';
-            canvasContext.fillRect(canvas.width/2-75,canvas.height/2-75,150,150);
+            canvasContext.fillRect(175,75,50,50);
+            calledRect+=1;
+
         }
+
+        //SLOW MOTION OVER TIME(basic dynamic animation)
+
+
+
     </script>
           
     </body>
