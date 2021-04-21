@@ -6,14 +6,18 @@
         var canvas;
         var canvasContext;
         var calledRect = 1;
+        var moveYRect = 30, increaseRedRect=5, progressGRect=2;
 
         window.onload = function() {
             console.log("Exicted to learn canvas!");
             canvas = document.getElementById('canvasGame');
             canvasContext = canvas.getContext('2d');
 
-            drawRectangles(); //called function for the first time
-            drawRectangles(); //called function for second time
+            setInterval(drawRectangles, 600); // What this line does is, its calling drawRectangles functions every 600ms on windows loading,
+            //This is the way to do motion in games, set interval, call the required function, make it move! 
+            //Note: here, every other rectangle in drawRectangles function is intact, and only yellow rectangle is changing since we have set its 
+            // left starting postion as a dynamic variable which keeps on changing every 600s. We can even put this particular rectangle in another 
+            // function and set interval to that
         }
 
         function drawRectangles(){
@@ -24,9 +28,14 @@
             canvasContext.fillStyle = 'blue';
             canvasContext.fillRect(10,10,780,580);
             canvasContext.fillStyle = 'red';
-            canvasContext.fillRect(275,175,250,250);
+            canvasContext.fillRect(canvas.width/2-25,canvas.height/2-25,increaseRedRect,increaseRedRect);
+            increaseRedRect+=5;
             canvasContext.fillStyle = 'yellow';
-            canvasContext.fillRect(175,75,50,50);
+            canvasContext.fillRect(moveYRect,75,50,50);
+            progressGRect+=5;
+            canvasContext.fillStyle = 'green';
+            canvasContext.fillRect(30,510,progressGRect,20);
+            moveYRect+=10;
             calledRect+=1;
 
         }
