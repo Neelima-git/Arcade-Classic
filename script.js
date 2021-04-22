@@ -6,8 +6,13 @@
         var ballSpeedX = 10;
         var ballSpeedY = 4;
 
+        var player1Score = 0;
+        var player2Score = 0;
+
         var paddle1Y = 250;
+        var paddle2Y = 250;
         const PADDLE_HEIGHT = 100;
+        const PADDLE_THICKNESS = 10;
 
         function calculateMousePos(evt){
             var rect = canvas.getBoundingClientRect();
@@ -39,14 +44,43 @@
                     })
         }
 
-        function moveEverything(){
-            ballX = ballX + ballSpeedX;
-            ballY = ballY + ballSpeedY;
-            if(ballX > canvas.width){
-                ballSpeedX = -ballSpeedX;
+        function ballReset(){
+            ballSpeedX = -ballSpeedX;
+            ballX = canvas.width/2;
+            ballY = canvas.height/2;
+        }
+
+        function computerMovement(){
+            var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT/2);
+            if(paddle2YCenter < ballY-35){
+                paddle2Y+=6;
+            }else if( paddle2YCenter > ballY+35){
+                paddle2Y-=6;
             }
+        }
+
+        function moveEverything(){
+
+            computerMovement();
+
+            ballX += ballSpeedX;
+            ballY += ballSpeedY;
+
             if(ballX < 0){
-                ballSpeedX = -ballSpeedX;
+                if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT){
+                    ballSpeedX = -ballSpeedX;
+                }else{
+                    ballReset();
+                    player2Score++;
+                }
+            }
+            if(ballX > canvas.width){
+                if(ballY > paddle2Y && ballY < paddle2Y+PADDLE_HEIGHT){
+                    ballSpeedX = -ballSpeedX;
+                }else{
+                    ballReset();
+                    player1Score++;
+                }
             }
             if(ballY > canvas.height){
                 ballSpeedY = -ballSpeedY;
@@ -59,11 +93,16 @@
         function drawEverything(){
             colorRect(0,0,canvas.width,canvas.height, 'black');
             //this  is left player paddle
-            colorRect(10,paddle1Y,10,PADDLE_HEIGHT, 'blue');
+            colorRect(10,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'blue');
+
+            //this  is right player paddle
+            colorRect(canvas.width-PADDLE_THICKNESS-10,paddle2Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'blue');
 
             //draws the ball
             colorCircle(ballX, ballY, 10, 'yellow');
-        
+
+            canvasContext.fillText(player1Score, 100, 100);
+            canvasContext.fillText(player2Score, canvas.width-100, 100);
         }
 
         function colorCircle(centerX, centerY, radius, drawColor){
