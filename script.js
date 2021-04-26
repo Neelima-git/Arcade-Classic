@@ -8,7 +8,7 @@
 
         var player1Score = 0;
         var player2Score = 0;
-        const  WIN_SCORE = 3;
+        const  WIN_SCORE = 5;
 
         var showWinScreen = false;
 
@@ -147,17 +147,19 @@
 
             drawNet();
 
+                
+            canvasContext.fillText("You: " + player1Score, 180, 100);
+            canvasContext.fillText("Computer: "+ player2Score, canvas.width-250, 100);
+
             //this  is left player paddle
-            colorRect(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'blue');
+            colorRect(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'yellow');
 
             //this  is right player paddle
-            colorRect(canvas.width-PADDLE_THICKNESS,paddle2Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'blue');
+            colorRect(canvas.width-PADDLE_THICKNESS,paddle2Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'yellow');      
 
             //draws the ball
             colorCircle(ballX, ballY, 10, 'yellow');
 
-            canvasContext.fillText("You: " + player1Score, 180, 100);
-            canvasContext.fillText("Computer: "+ player2Score, canvas.width-250, 100);
         }
 
         function colorCircle(centerX, centerY, radius, drawColor){
