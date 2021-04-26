@@ -5,6 +5,7 @@
         var ballY = 50;
         var ballSpeedX = 10;
         var ballSpeedY = 4;
+        var ballRadius = 10;
 
         var player1Score = 0;
         var player2Score = 0;
@@ -148,8 +149,8 @@
             drawNet();
 
                 
-            canvasContext.fillText("You: " + player1Score, 180, 100);
-            canvasContext.fillText("Computer: "+ player2Score, canvas.width-250, 100);
+            fillText("You: " + player1Score, 180, 100);
+            fillText("Computer: "+ player2Score, canvas.width-250, 100);
 
             //this  is left player paddle
             colorRect(0,paddle1Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'yellow');
@@ -158,7 +159,7 @@
             colorRect(canvas.width-PADDLE_THICKNESS,paddle2Y,PADDLE_THICKNESS,PADDLE_HEIGHT, 'yellow');      
 
             //draws the ball
-            colorCircle(ballX, ballY, 10, 'yellow');
+            colorCircle(ballX, ballY, ballRadius, 'yellow');
 
         }
 
@@ -174,4 +175,8 @@
             canvasContext.fillRect(leftX, topY, width, height);
         }
 
-       
+        function fillText(text,x,y){
+            canvasContext.fillStyle = "#FFF";
+            canvasContext.font = "25px serif";
+            canvasContext.fillText(text, x, y);
+        }

@@ -1,4 +1,9 @@
+*{
+    background-color: rgb(214, 195, 195);
+}
+
 #canvasGame{
+    border: 5px solid #fff;
     position: absolute;
     top:0;
     bottom: 0;
