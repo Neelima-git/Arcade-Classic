@@ -120,7 +120,7 @@
         }
 
         function drawNet(){
-            for(var i=0; i<canvas.height; i+=40){
+            for(var i=0; i<canvas.height; i+=35){
                 colorRect(canvas.width/2-1, i , 2, 20, 'white');
             }
         }
